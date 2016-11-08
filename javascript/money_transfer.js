@@ -1,70 +1,109 @@
+
 var currentAccount = localStorage.getItem("current_account_number");
+var user = getLocalUser();
 
-var chequingBalance = getChequingBalance(currentAccount);
-var savingsBalance = getSavingsBalance(currentAccount);
+var chequingBalance = getChequingBalance();
+var savingsBalance = getSavingsBalance();
 
 
 
-function setAccountBalance(acntNum, value, acntType) {
+// Not actually used
+function setAccountBalance(value, acntType) {
 	// set the balance of the account and update localStorage
-	var user = localStorage.getItem(acntNum);
-	var account = JSON.parse(user);
+
 	// account = [ {"pin": 1234, "accounts": { "chequing": { "balance": 7000 }, "savings": { "balance": 4000 }}, "name": "John Doe", "history": [] }]
-	account["accounts"][acntType]["balance"] = value;
+	user["accounts"][acntType]["balance"] = value;
 	console.log("Account " + acntType + "updated: " + value);
 
-	var stringAccount = JSON.stringify(account);
-	localStorage.setItem(acntNum, stringAccount);
+	localStorage.setItem(currentAccount, JSON.stringify(user));
+	chequingBalance = getChequingBalance();
+	savingsBalance = getSavingsBalance();
 };
-
-function getChequingBalance(acntNum) {
-	// get the balance for chequing 
-	var user = localStorage.getItem(acntNum);
-	var account = JSON.parse(user);
-	return account["accounts"]["chequing"]["balance"];
-}
-
-function getSavingsBalance(acntNum) {
-	// get the balance for savings
-	var user = localStorage.getItem(acntNum);
-	var account = JSON.parse(user);
-	return account["accounts"]["savings"]["balance"];
-}
 
 function withdraw(fromAcnt, amount) {
 	// simulate a withdrawl from a certain account (chequing or savings)
-	var user = localStorage.getItem(currentAccount);
-	var account = JSON.parse(user);
 
 	if(fromAcnt == "chequing") {
 		chequingBalance = chequingBalance - amount;
-		account["accounts"][fromAcnt]["balance"] = chequingBalance;
-	} else {
+		setAccountBalance(chequingBalance, fromAcnt);
+	} else if(fromAcnt == "savings"){
 		savingsBalance = savingsBalance - amount;
-		account["accounts"][fromAcnt]["balance"] = savingsBalance;
+		setAccountBalance(savingsBalance, fromAcnt);
+	} else {
+		// this will never be hit unless you're a hacker
+		console.log("Not An Account");
 	}
 
-	var stringAccount = JSON.stringify(account);
-	localStorage.setItem(currentAccount, stringAccount);
+	localStorage.setItem(currentAccount, JSON.stringify(user));
 }
 
 function deposit(toAcnt, amount) {
 	// simulate a deposit to a certain account (chequing or savings)
-	var user = localStorage.getItem(currentAccount);
-	var account = JSON.parse(user);
 
 	if(toAcnt == "chequing") {
 		chequingBalance = chequingBalance + amount;
-		account["accounts"][toAcnt]["balance"] = chequingBalance;
-	} else {
+		setAccountBalance(chequingBalance, toAcnt);
+	} else if(toAcnt == "savings") {
 		savingsBalance = savingsBalance + amount;
-		account["accounts"][fromAcnt]["balance"] = chequingBalance;
+		setAccountBalance(savingsBalance, toAcnt);
+	} else {
+		// this will never be hit unless you're a hacker
+		console.log("Not An Account");
 	}
 
-	var stringAccount = JSON.stringify(account);
-	localStorage.setItem(currentAccount, stringAccount);
-
+	localStorage.setItem(currentAccount, JSON.stringify(user));
 }
+
+function transferFund(fromAcnt, toAcnt, amount) {
+
+	if(fromAcnt == toAcnt) {
+		// bad
+		console.log("Select different accounts");
+		return
+	}
+
+	if(fromAcnt == "chequing" && toAcnt == "savings") {
+		chequingBalance = chequingBalance - amount;
+		savingsBalance = savingsBalance + amount;
+
+		setAccountBalance(chequingBalance, fromAcnt);
+		setAccountBalance(savingsBalance, toAcnt);
+
+	} else if(fromAcnt == "savings" && toAcnt == "chequing") {
+		savingsBalance = savingsBalance - amount;
+		chequingBalance = chequingBalance + amount;
+
+		setAccountBalance(savingsBalance, fromAcnt);
+		setAccountBalance(chequingBalance, toAcnt);
+
+	} else {
+		// Shouldn't ever get hit unless you're trying to hack
+		console.log("Invalid accounts");
+	}
+
+	localStorage.setItem(currentAccount, JSON.stringify(user));
+}
+
+function getChequingBalance() {
+	// get the balance for chequing 
+
+	return user["accounts"]["chequing"]["balance"];
+}
+
+function getSavingsBalance() {
+	// get the balance for savings
+	var user = getLocalUser();
+
+	return user["accounts"]["savings"]["balance"];
+}
+
+
+function getLocalUser() {
+ 	var localUser = localStorage.getItem(currentAccount);
+ 
+ 	return JSON.parse(localUser);
+ } 
+
 
 
 
