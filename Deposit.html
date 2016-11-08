@@ -23,40 +23,60 @@
   <body>
   	<div class="container">
       <div class="row">
-        <h1 class="text-center">Welcome</h1>
+        <h1 class="text-center">Deposit</h1>
       </div>
-  		<div class="row">
+		<div class="row">
         <div class="col-lg-6 col-lg-offset-3">
+			<div class="form-group">
+			<label for="sel1">Deposit To:</label>
+			<select class="form-control" id="sel1">
+			<option>Chequing</option>
+			<option>Savings</option>
+			<option>USD</option>
+			<option>Mastercard</option>
+		  </select>
+			</div>
+        </div>
+		</div>
+	</div>
+
+<div class="container">
+  		<div class="row">
+        <div class="col-lg-offset-3 col-lg-6">
     			<div class="form-group">
-            <label for="account-number">Account Number</label>
-            <input type="number" class="form-control" id="account-number">
+            <label for="account-number">Amount to Deposit:</label>
+			<div class="input-group">
+			<div class="input-group-addon">$</div>
+            <input type="number" class="form-control" id="account-number" >
+			<div class="input-group-addon">.00</div>
           </div>
         </div>
   		</div>
+		</div>
   		<div class="row">
         <center>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(1)">1</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(2)">2</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(3)">3</button>
-          </div> 
+            <button type="button" class="btn btn-default">1</button>
+            <button type="button" class="btn btn-default">2</button>
+            <button type="button" class="btn btn-default">3</button>
+          </div>
         </center>
       </div>
       <div class="row">
         <center>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(4)">4</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(5)">5</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(6)">6</button>
+            <button type="button" class="btn btn-default">4</button>
+            <button type="button" class="btn btn-default">5</button>
+            <button type="button" class="btn btn-default">6</button>
           </div>
         </center>
   		</div>
       <div class="row">
         <center>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(7)">7</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(8)">8</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(9)">9</button>
+            <button type="button" class="btn btn-default">7</button>
+            <button type="button" class="btn btn-default">8</button>
+            <button type="button" class="btn btn-default">9</button>
           </div>
         </center>
       </div>
@@ -64,19 +84,12 @@
         <center>
           <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-default" onclick="myFunction(0)">0</button>
+            <button type="button" class="btn btn-default">0</button>
             <button type="button" class="btn btn-success"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
-  	</div>
-	
-	<script>
-	function myFunction(value) {
-	console.log(value);
-    document.getElementById("account-number").value = document.getElementById("account-number").value + value;
-	}
-	</script>
+  	</div>	
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
