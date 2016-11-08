@@ -8,7 +8,7 @@ var savingsBalance = getSavingsBalance();
 
 
 
-function setAccountBalance(value, acntType, fundsOut, diff) {
+function setAccountBalance(value, acntType, transaction, diff, fromAcnt, toAcnt) {
 	// set the balance of the account and update localStorage
 
 	// account = [ {"pin": 1234, "accounts": { "chequing": { "balance": 7000 }, "savings": { "balance": 4000 }}, "name": "John Doe", "history": [] }]
@@ -18,27 +18,30 @@ function setAccountBalance(value, acntType, fundsOut, diff) {
 	var date = new Date();
 
 
-	// fundsOut means that money was taken out of the account. 
-	if(fundsOut) {
-		user["history"].push(JSON.stringify({ "account": acntType, "fundsOut": fundsOut, "amount": diff, "curr_balance": value, "date": date.toString() }));
-	} else {
-		user["history"].push(JSON.stringify({ "account": acntType, "fundsOut": fundsOut, "amount": diff, "curr_balance": value, "date": date.toString() }));
-	}
+	user["history"].push(JSON.stringify({ "from": fromAcnt, "to": toAcnt, "transaction_type": transaction, "amount": diff, "current_balance": value, "date": date.toString()}));
 
 	localStorage.setItem(currentAccount, JSON.stringify(user));
 	chequingBalance = getChequingBalance();
 	savingsBalance = getSavingsBalance();
 };
 
-function withdraw(fromAcnt, amount) {
+function withdraw(fromAcnt, amount, toAcnt=null) {
 	// simulate a withdrawl from a certain account (chequing or savings)
 
 	if(fromAcnt == "chequing") {
+		if(chequingBalance < amount) {
+			console.log("Insufficient funds to withdraw $" + amount);
+			return false;
+		}
 		chequingBalance = chequingBalance - amount;
-		setAccountBalance(chequingBalance, fromAcnt, true, amount);
+		setAccountBalance(chequingBalance, fromAcnt, "withdawl", amount, fromAcnt, toAcnt);
 	} else if(fromAcnt == "savings"){
+		if(savingsBalance < amount) {
+			console.log("Insufficient funds to withdraw $" + amount);
+			return false;
+		}
 		savingsBalance = savingsBalance - amount;
-		setAccountBalance(savingsBalance, fromAcnt,  true, amount);
+		setAccountBalance(savingsBalance, fromAcnt,  "withdawl", amount, fromAcnt, toAcnt);
 	} else {
 		// this will never be hit unless you're a hacker
 		console.log("Not An Account");
@@ -47,15 +50,15 @@ function withdraw(fromAcnt, amount) {
 	localStorage.setItem(currentAccount, JSON.stringify(user));
 }
 
-function deposit(toAcnt, amount) {
+function deposit(toAcnt, amount, fromAcnt=null) {
 	// simulate a deposit to a certain account (chequing or savings)
 
 	if(toAcnt == "chequing") {
 		chequingBalance = chequingBalance + amount;
-		setAccountBalance(chequingBalance, toAcnt, false, amount);
+		setAccountBalance(chequingBalance, toAcnt, "deposit", amount, fromAcnt, toAcnt);
 	} else if(toAcnt == "savings") {
 		savingsBalance = savingsBalance + amount;
-		setAccountBalance(savingsBalance, toAcnt, false, amount);
+		setAccountBalance(savingsBalance, toAcnt, "deposit", amount, fromAcnt, toAcnt);
 	} else {
 		// this will never be hit unless you're a hacker
 		console.log("Not An Account");
@@ -72,26 +75,10 @@ function transferFund(fromAcnt, toAcnt, amount) {
 		return
 	}
 
-	if(fromAcnt == "chequing" && toAcnt == "savings") {
-		chequingBalance = chequingBalance - amount;
-		savingsBalance = savingsBalance + amount;
+	withdraw(fromAcnt, amount, toAcnt);
+	deposit(toAcnt, amount, fromAcnt);
 
-		setAccountBalance(chequingBalance, fromAcnt, true, amount);
-		setAccountBalance(savingsBalance, toAcnt, false, amount);
 
-	} else if(fromAcnt == "savings" && toAcnt == "chequing") {
-		savingsBalance = savingsBalance - amount;
-		chequingBalance = chequingBalance + amount;
-
-		setAccountBalance(savingsBalance, fromAcnt, true, amount);
-		setAccountBalance(chequingBalance, toAcnt, false, amount);
-
-	} else {
-		// Shouldn't ever get hit unless you're trying to hack
-		console.log("Invalid accounts");
-	}
-
-	localStorage.setItem(currentAccount, JSON.stringify(user));
 }
 
 function getChequingBalance() {
@@ -109,7 +96,7 @@ function getSavingsBalance() {
 
 function getLocalUser() {
  	var localUser = localStorage.getItem(currentAccount);
- 
+
  	return JSON.parse(localUser);
  } 
 
