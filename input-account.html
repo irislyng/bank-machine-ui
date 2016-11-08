@@ -29,7 +29,7 @@
         <div class="col-lg-6 col-lg-offset-3">
     			<div class="form-group">
             <label for="account-number">Account Number</label>
-            <input type="number" class="form-control" id="account-number">
+            <p><input type="number" class="form-control" id="account-number"><td><span class="error_form" id="account-number_error_message"></span></td><p>
           </div>
         </div>
   		</div>
@@ -75,12 +75,34 @@
 	function myFunction(value) {
 	console.log(value);
     document.getElementById("account-number").value = document.getElementById("account-number").value + value;
+	check_account_number();
 	}
 	</script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script>
+		
+		$("#account-number_error_message").hide();
+		
+		var error_account_number = false;
+		
+		function check_account_number() {
+		
+		var account_number_length = $("#account-number").val().length;
+		
+		if(account_number_length < 16) {
+		$("#account-number_error_message").html("Incorrect Account Number");
+		$("#account-number_error_message").show();
+		error_account_number = true;
+		} else if(account_number_length > 16){
+		$("#account-number_error_message").prop('disabled', true);
+		} else {
+		$("#account-number_error_message").hide();
+		}
+	}
+	</script>
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
