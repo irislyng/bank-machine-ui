@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bank Machine</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	<div class="container">
+      <div class="row">
+        <h1 class="text-center">Welcome</h1>
+      </div>
+  		<div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+    			<div class="form-group">
+            <label for="account-number">Account Number</label>
+            <p><input type="number" class="form-control" id="account-number"><td><span class="error_form" id="account-number_error_message"></span></td><p>
+          </div>
+        </div>
+  		</div>
+  		<div class="row">
+        <center>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-default" onclick="myFunction(1)">1</button>
+            <button type="button" class="btn btn-default" onclick="myFunction(2)">2</button>
+            <button type="button" class="btn btn-default" onclick="myFunction(3)">3</button>
+          </div> 
+        </center>
+      </div>
+      <div class="row">
+        <center>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-default" onclick="myFunction(4)">4</button>
+            <button type="button" class="btn btn-default" onclick="myFunction(5)">5</button>
+            <button type="button" class="btn btn-default" onclick="myFunction(6)">6</button>
+          </div>
+        </center>
+  		</div>
+      <div class="row">
+        <center>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-default" onclick="myFunction(7)">7</button>
+            <button type="button" class="btn btn-default" onclick="myFunction(8)">8</button>
+            <button type="button" class="btn btn-default" onclick="myFunction(9)">9</button>
+          </div>
+        </center>
+      </div>
+      <div class="row">
+        <center>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-default" onclick="myFunction(0)">0</button>
+            <button type="button" class="btn btn-success"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+          </div>
+        </center>
+      </div>
+  	</div>
+	
+	<script>
+	function myFunction(value) {
+	console.log(value);
+    document.getElementById("account-number").value = document.getElementById("account-number").value + value;
+	check_account_number();
+	}
+	</script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script>
+		
+		$("#account-number_error_message").hide();
+		
+		var error_account_number = false;
+		
+		function check_account_number() {
+		
+		var account_number_length = $("#account-number").val().length;
+		
+		if(account_number_length < 16) {
+		$("#account-number_error_message").html("Incorrect Account Number");
+		$("#account-number_error_message").show();
+		error_account_number = true;
+		} else if(account_number_length > 16){
+		$("#account-number_error_message").prop('disabled', true);
+		} else {
+		$("#account-number_error_message").hide();
+		}
+	}
+	</script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
