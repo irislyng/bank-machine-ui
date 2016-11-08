@@ -7,7 +7,7 @@ var savingsBalance = getSavingsBalance();
 
 
 
-// Not actually used
+
 function setAccountBalance(value, acntType) {
 	// set the balance of the account and update localStorage
 
@@ -92,7 +92,6 @@ function getChequingBalance() {
 
 function getSavingsBalance() {
 	// get the balance for savings
-	var user = getLocalUser();
 
 	return user["accounts"]["savings"]["balance"];
 }
