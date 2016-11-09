@@ -41,7 +41,7 @@
           <h3 class="text-center highlight">Welcome, <span id="user-name">Name</span>.</h3>
         </div>
         <div class="col-lg-4">
-          <a href="withdrawal.html">
+          <a href="Accounts.html" onclick="setTransType('withdrawal')">
             <button type="button" class="btn btn-default btn-block">Withdraw</button>
           </a>
         </div>
@@ -58,7 +58,7 @@
           </p>
         </div>
         <div class="col-lg-4">
-          <a href="deposit.html">
+          <a href="Accounts.html" onclick="setTransType('deposit')">
             <button type="button" class="btn btn-default btn-block">Deposit</button>
           </a>
         </div>
@@ -72,6 +72,17 @@
         </div>
   		</div>
   	</div>
+    
+    <script>
+        var transType = localStorage.getItem("transaction_type");
+
+        function setTransType(transaction_type) {
+          localStorage.setItem("transaction_type", transaction_type);
+        }
+
+    </script>
+    
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
