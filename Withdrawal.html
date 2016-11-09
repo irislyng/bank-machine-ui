@@ -80,6 +80,7 @@
               <input id="withdrawal-amount" type="text" onkeypress="return false" class="form-control">
 			        <div class="input-group-addon">.00</div>
 			       </div>
+             <div id="withdrawal-amount-error-message" class="alert alert-danger" hidden=""></div>
 				  </div>
 
         </div>
@@ -175,8 +176,6 @@
     function withdrawMessage(success, amount) {
       if(success) {
         alert("Withdrawing: " + amount);
-        location.href="main-menu.html";
-      } else {
         location.href="main-menu.html";
       }
     }
