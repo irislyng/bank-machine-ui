@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bank Machine</title>
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Javascript Files -->
+    <script type="text/javascript" src="javascript/change-pin.js"></script>
+  </head>
+  <body>
+  	<div class="container">
+      <div class="row">
+        <h1 class="text-center">Bank Machine UI ATM</h1>
+      </div>
+      <div class="row">
+        <h3 class="text-center">Welcome, <span id="user-name">Name</span>.</h3>
+      </div>
+      <div class="row">
+        <p class="text-center">Account Number: <span id="account-number">Number</span></p>
+      </div>
+  		<div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+    			<div class="form-group">
+				<label for="current-pin-number">Enter Current Pin Number</label>
+            <input id="current-pin-number" type="password" onkeypress="return false" maxlength="4" class="form-control" onclick="pointerAt(this.id)">
+            <div id="current-pin-number-error-message" class="alert alert-danger" hidden=""></div>
+          </div>
+        </div>
+  		</div>
+		<div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+    			<div class="form-group">
+				<label for="new-pin-number">Enter New Pin Number</label>
+            <input id="new-pin-number" type="password" onkeypress="return false" maxlength="4" class="form-control" onclick="pointerAt(this.id)">
+            <div id="new-pin-number-error-message" class="alert alert-danger" hidden=""></div>
+          </div>
+        </div>
+  		</div>
+		<div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+    			<div class="form-group">
+				<label for="confirm-new-pin-number">Confirm New Pin Number</label>
+            <input id="confirm-new-pin-number" type="password" onkeypress="return false" maxlength="4" class="form-control" onclick="pointerAt(this.id)">
+            <div id="confirm-pin-number-error-message" class="alert alert-danger" hidden=""></div>
+          </div>
+        </div>
+  		</div>
+  		<div class="row">
+        <center>
+            <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(1)">1</button>
+            <button type="button" class="btn btn-default" onclick="addInput(2)">2</button>
+            <button type="button" class="btn btn-default" onclick="addInput(3)">3</button>
+          </div> 
+        </center>
+      </div>
+      <div class="row">
+        <center>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(4)">4</button>
+            <button type="button" class="btn btn-default" onclick="addInput(5)">5</button>
+            <button type="button" class="btn btn-default" onclick="addInput(6)">6</button>
+          </div>
+        </center>
+  		</div>
+      <div class="row">
+        <center>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(7)">7</button>
+            <button type="button" class="btn btn-default" onclick="addInput(8)">8</button>
+            <button type="button" class="btn btn-default" onclick="addInput(9)">9</button>
+          </div>
+        </center>
+      </div>
+      <div class="row">
+        <center>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-warning" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-default" onclick="addInput(0)">0</button>
+            <button id="button-enter-pin-number" type="button" class="btn btn-success" disabled onclick="performChangePin()"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+          </div>
+        </center>
+      </div>
+  	</div>
+	
+	<script>
+	var pointer;
+	function pointerAt(id) {
+		pointer = id;
+	}
+	
+	function performChangePin() {
+		var oldPin = parseInt(document.getElementById("current-pin-number").value);
+		var newPin = parseInt(document.getElementById("new-pin-number").value);
+		var confirmedPin = parseInt(document.getElementById("confirm-new-pin-number").value);
+		changePin(oldPin, newPin, confirmedPin);
+		console.log("oldPin=" + oldPin);
+		console.log("newPin=" + newPin);
+		console.log("confirmedPin=" + confirmedPin);
+	}
+	
+	function addInput(value) {
+	
+      console.log(value);
+      var input = document.getElementById(pointer).value;
+      var length = input.length;
+      if (length < 4) {
+        document.getElementById(pointer).value = input + value;
+      } 
+
+      checkLength();
+    }
+
+    function removeInput() {
+      var input = document.getElementById(pointer).value;
+      var length = input.length;
+
+      document.getElementById(pointer).value = input.slice(0, length - 1);
+
+      checkLength();
+    }
+
+    function checkLength() {
+      var length = document.getElementById(pointer).value.length;
+
+      if (length < 4) {
+        document.getElementById("button-enter-pin-number").disabled = true;
+      } else {
+        document.getElementById("button-enter-pin-number").disabled = false;
+      }
+    }
+	</script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
