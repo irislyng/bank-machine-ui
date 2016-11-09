@@ -1,8 +1,9 @@
 
 var currentAccount = localStorage.getItem("current_account_number");
 var user = getLocalUser();
-var chequingBalance = getChequingBalance();
-var savingsBalance = getSavingsBalance();
+var chequingBalance;
+var savingsBalance;
+updateBalances();
 
 function setAccountBalance(value, acntType, transaction, diff, fromAcnt, toAcnt) {
 	// Set the balance of the account and update localStorage.
