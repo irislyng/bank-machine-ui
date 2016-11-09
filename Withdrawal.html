@@ -64,19 +64,33 @@
           <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(120)">$120</button>
         </div>
     </div>
-    <div class="row">
-      <h4 class="text-center">- OR -</h4>
-    </div>
-		<div class="row">
-      <div class="col-md-6 col-md-offset-3">
-  			<div class="form-group">
-          <label for="account-number">Custom Withdrawal Amount</label>
-		      <div class="input-group">
-		        <div class="input-group-addon">$</div>
-            <input id="withdrawal-amount" type="text" onkeypress="return false" class="form-control">
-		        <div class="input-group-addon">.00</div>
-		       </div>
-			  </div>
+	  <div class="container" style="margin-top: 30px;">
+      <div class="row">
+        <h4 class="text-center">- OR -</h4>
+      </div>
+  		<div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+    			<div class="form-group">
+            <label for="account-number">Custom Withdrawal Amount</label>
+			      <div class="input-group">
+			        <div class="input-group-addon">$</div>
+              <input id="withdrawal-amount" type="text" onkeypress="return false" class="form-control">
+			        <div class="input-group-addon">.00</div>
+			       </div>
+             <div id="withdrawal-amount-error-message" class="alert alert-danger" hidden=""></div>
+				  </div>
+
+        </div>
+  		</div>
+  		<div class="row">
+        <center>
+
+            <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(1)">1</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(2)">2</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(3)">3</button>
+          </div> 
+        </center>
       </div>
 		</div>
 		<div class="row">
@@ -168,8 +182,6 @@
     function withdrawMessage(success, amount) {
       if(success) {
         alert("Withdrawing: " + amount);
-        location.href="main-menu.html";
-      } else {
         location.href="main-menu.html";
       }
     }

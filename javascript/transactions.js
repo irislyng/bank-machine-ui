@@ -29,12 +29,20 @@ function setAccountBalance(value, acntType, transaction, diff, fromAcnt, toAcnt)
 
 function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 	// Simulate a withdrawl from a certain account (chequing or savings).
+	if(amount%20 != 0) {
+		console.log("Error: Unable to withdraw $" + amount + " must be multiples of $20");
+		document.getElementById("withdrawal-amount-error-message").innerHTML = "Error: Unable to withdraw $" + amount + " must be multiples of $20";
+		document.getElementById("withdrawal-amount-error-message").removeAttribute("hidden");
+		return false;
+	}
+
 
 	if(fromAcnt == "chequing") {
 		if(chequingBalance < amount) {
 			// TODO: Set up error message.
 			console.log("Error: Insufficient funds to withdraw $" + amount);
-			alert("Insufficient funds to withdraw $" + amount);
+			document.getElementById("withdrawal-amount-error-message").innerHTML = "Insufficient funds to withdraw $" + amount;
+			document.getElementById("withdrawal-amount-error-message").removeAttribute("hidden");
 			return false;
 		}
 		var newChequingBalance = chequingBalance - amount;
@@ -43,7 +51,8 @@ function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 		if(savingsBalance < amount) {
 			// TODO: Set up error message.
 			console.log("Error: Insufficient funds to withdraw $" + amount);
-			alert("Insufficient funds to withdraw $" + amount);
+			document.getElementById("withdrawal-amount-error-message").innerHTML = "Insufficient funds to withdraw $" + amount;
+			document.getElementById("withdrawal-amount-error-message").removeAttribute("hidden");
 			return false;
 		}
 		var newSavingsBalance = savingsBalance - amount;
