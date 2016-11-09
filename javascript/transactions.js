@@ -70,9 +70,6 @@ function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 function deposit(fromAcnt = null, toAcnt, amount) {
 	// Simulate a deposit to a certain account (chequing or savings).
 
-	// Convert text input to number.
-	amount = parseInt(amount);
-
 	if(toAcnt == "chequing") {
 		var newChequingBalance = chequingBalance + amount;
 		setAccountBalance(newChequingBalance, toAcnt, "deposit", amount, fromAcnt, toAcnt);
