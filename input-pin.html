@@ -7,13 +7,13 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bank Machine</title>
 
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,11 +28,18 @@
   </head>
   <body onload="checkUser(); init();">
   	<div class="container">
+      <div class="back" style="position: absolute; float: left;">
+        <a href="input-account.html">
+          <button type="button" class="btn btn-default">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Back
+          </button>
+        </a> 
+      </div>
       <div class="row">
         <h1 class="text-center">Bank Machine UI ATM</h1>
       </div>
       <div class="row">
-        <h3 class="text-center">Welcome, <span id="user-name">Name</span>.</h3>
+        <h3 class="text-center highlight">Welcome, <span id="user-name">Name</span>.</h3>
       </div>
       <div class="row">
         <p class="text-center">Account Number: <span id="account-number">Number</span></p>
@@ -41,7 +48,7 @@
         <h4 class="text-center">Please enter your 4-digit pin number.</h4>
       </div>
   		<div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
+        <div class="col-lg-4 col-lg-offset-4">
     			<div class="form-group">
             <input id="pin-number" type="password" onkeypress="return false" maxlength="4" class="form-control">
             <div id="pin-number-error-message" class="alert alert-danger" hidden=""></div>
@@ -51,36 +58,36 @@
   		<div class="row">
         <center>
             <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default" onclick="addInput(1)">1</button>
-            <button type="button" class="btn btn-default" onclick="addInput(2)">2</button>
-            <button type="button" class="btn btn-default" onclick="addInput(3)">3</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(1)">1</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(2)">2</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(3)">3</button>
           </div> 
         </center>
       </div>
       <div class="row">
         <center>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default" onclick="addInput(4)">4</button>
-            <button type="button" class="btn btn-default" onclick="addInput(5)">5</button>
-            <button type="button" class="btn btn-default" onclick="addInput(6)">6</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(4)">4</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(5)">5</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(6)">6</button>
           </div>
         </center>
   		</div>
       <div class="row">
         <center>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default" onclick="addInput(7)">7</button>
-            <button type="button" class="btn btn-default" onclick="addInput(8)">8</button>
-            <button type="button" class="btn btn-default" onclick="addInput(9)">9</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(7)">7</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(8)">8</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(9)">9</button>
           </div>
         </center>
       </div>
       <div class="row">
         <center>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-warning" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-default" onclick="addInput(0)">0</button>
-            <button id="button-enter-pin-number" type="button" class="btn btn-success" disabled onclick="login()"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-warning btn-keypad" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(0)">0</button>
+            <button id="button-enter-pin-number" type="button" class="btn btn-success btn-keypad" disabled onclick="login()"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
@@ -88,7 +95,6 @@
 	
 	<script>
 	function addInput(value) {
-      console.log(value);
       var input = document.getElementById("pin-number").value;
       var length = input.length;
 

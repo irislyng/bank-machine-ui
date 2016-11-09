@@ -1,5 +1,7 @@
 body {
-
+	font-family: sans-serif;
+	background-color: #F0EBD8;
+	color: #0D1321;
 }
 
 .vertical-center {
@@ -11,13 +13,21 @@ body {
 }
 
 h1 {
+	color: #143642;
 	padding-bottom: 20px;
 }
 
 .btn {
-	width: 100px;
 	height: 50px;
-	margin: 15px 0px;
+	margin: 10px 0px;
+}
+
+.btn-keypad {
+	width: 80px;
+}
+
+.highlight {
+	color: #0F8B8D;
 }
 
 a {
@@ -25,7 +35,7 @@ a {
 }
 
 a:hover {
-	text-decoration: none !important;
+	text-decoration: none;
 }
 
 .alert {
