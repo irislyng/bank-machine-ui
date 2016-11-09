@@ -110,7 +110,7 @@
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-warning" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
             <button type="button" class="btn btn-default" onclick="addInput(0)">0</button>
-            <button id="button-enter-withdrawal" type="button" class="btn btn-success"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+            <button id="button-enter-withdrawal" type="button" class="btn btn-success" onclick="customWithdraw()"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
@@ -118,6 +118,10 @@
 	
 
   	<script>
+
+    var transType = localStorage.getItem("transaction_type");
+    var acnt = localStorage.getItem("account"); 
+
   	function addInput(value) {
       var input = document.getElementById("withdrawal-amount").value;
       var length = input.length;
@@ -145,6 +149,28 @@
         document.getElementById("button-enter-withdrawal").disabled = false;
       }
     }
+
+    function fastWithdraw(amount) {
+      var success = withdraw(acnt, null, amount);
+      withdrawMessage(success, amount);
+    }
+    
+    function customWithdraw() {
+      amount = document.getElementById("withdrawal-amount").value;
+      var success = withdraw(acnt, null, amount);
+      withdrawMessage(success, amount);
+      
+    }
+
+    function withdrawMessage(success, amount) {
+      if(success) {
+        alert("Withdrawing: " + amount);
+        location.href="main-menu.html";
+      } else {
+        location.href="main-menu.html";
+      }
+    }
+
   	</script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

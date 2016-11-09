@@ -34,8 +34,8 @@ function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 		if(chequingBalance < amount) {
 			// TODO: Set up error message.
 			console.log("Error: Insufficient funds to withdraw $" + amount);
-			getElementById(error_id).innerHTML = "Error: Insufficient funds to withdraw $" + amount
-			return 
+			alert("Insufficient funds to withdraw $" + amount);
+			return false;
 		}
 		var newChequing = chequingBalance - amount;
 		setAccountBalance(newChequing, fromAcnt, "withdrawal", amount, fromAcnt, toAcnt);
@@ -43,7 +43,8 @@ function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 		if(savingsBalance < amount) {
 			// TODO: Set up error message.
 			console.log("Error: Insufficient funds to withdraw $" + amount);
-			return 
+			alert("Insufficient funds to withdraw $" + amount);
+			return false;
 		}
 		var newSavingsBalance = savingsBalance - amount;
 		setAccountBalance(newSavingsBalance, fromAcnt,  "withdrawal", amount, fromAcnt, toAcnt);
@@ -53,6 +54,8 @@ function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 	}
 
 	setLocalUser();
+	return true;
+
 }
 
 function deposit(fromAct = null, toAcnt, amount) {
