@@ -7,13 +7,13 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bank Machine</title>
     
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,8 +27,15 @@
   </head>
   <body>
   	<div class="container">
-    <div class="row">
-        <h1 class="text-center">Bank Machine UI ATM</h1>
+      <div class="back" style="position: absolute; float: left;">
+        <a href="index.html">
+          <button type="button" class="btn btn-default">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Back
+          </button>
+        </a>
+      </div>
+      <div class="row">
+        <h1 class="text-center" style="text-align: center;">Bank Machine UI ATM</h1>
       </div>
       <div class="row">
         <h4 class="text-center">Please enter your 16-digit account number.</h4>
@@ -46,36 +53,36 @@
   		<div class="row">
         <center>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default" onclick="addInput(1)">1</button>
-            <button type="button" class="btn btn-default" onclick="addInput(2)">2</button>
-            <button type="button" class="btn btn-default" onclick="addInput(3)">3</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(1)">1</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(2)">2</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(3)">3</button>
           </div> 
         </center>
       </div>
       <div class="row">
         <center>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default" onclick="addInput(4)">4</button>
-            <button type="button" class="btn btn-default" onclick="addInput(5)">5</button>
-            <button type="button" class="btn btn-default" onclick="addInput(6)">6</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(4)">4</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(5)">5</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(6)">6</button>
           </div>
         </center>
   		</div>
       <div class="row">
         <center>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default" onclick="addInput(7)">7</button>
-            <button type="button" class="btn btn-default" onclick="addInput(8)">8</button>
-            <button type="button" class="btn btn-default" onclick="addInput(9)">9</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(7)">7</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(8)">8</button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(9)">9</button>
           </div>
         </center>
       </div>
       <div class="row">
         <center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button id="button-edit-account-number" type="button" class="btn btn-warning" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-default" onclick="addInput(0)">0</button>
-            <button id="button-enter-account-number" type="button" class="btn btn-success" onclick="login()" disabled><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+          <div class="btn-group" role="group">
+            <button id="button-edit-account-number" type="button" class="btn btn-warning btn-keypad" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(0)">0</button>
+            <button id="button-enter-account-number" type="button" class="btn btn-success btn-keypad" onclick="login()" disabled><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
@@ -85,7 +92,6 @@
     checkLength();
 
   	function addInput(value) {
-      console.log(value);
       var input = document.getElementById("account-number").value;
       var length = input.length;
 
