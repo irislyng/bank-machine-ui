@@ -28,7 +28,7 @@
   <body onload="checkUser()">
   	<div class="container">
       <div class="back" style="position: absolute; float: left;">
-        <a href="main-menu.html">
+        <a href="accounts.html">
           <button type="button" class="btn btn-default">
             <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Back
           </button>
@@ -38,35 +38,32 @@
         <h1 class="text-center">Bank Machine UI ATM</h1>
       </div>
       <div class="row">
-        <h3 class="text-center">Withdraw Fast Cash</h3>
+        <h3 class="text-center">Withdraw Fast Cash from <span id="account-type"></span></h3>
       </div>
   		<div class="row">
-        <div class="col-lg-3">
+        <div class="col-md-offset-3 col-md-3">
           <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(20);">$20</button>
         </div>
-        <div class="col-lg-offset-6 col-lg-3">
+        <div class="col-md-3">
           <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(40)">$40</button>
         </div>
   		</div>
   		<div class="row">
-        <div class="col-lg-3">
+        <div class="col-md-offset-3 col-md-3">
           <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(60)">$60</button>
         </div>
-        <div class="col-lg-offset-6 col-lg-3">
+        <div class="col-md-3">
           <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(80)">$80</button>
         </div>
 		</div>
 		<div class="row">
-		<div class="col-lg-3">
+		<div class="col-md-offset-3 col-md-3">
 		  <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(100)">$100</button>
 		</div>
-        <div class="col-lg-offset-6 col-lg-3">
+        <div class="col-md-3">
           <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(120)">$120</button>
         </div>
     </div>
-
-
-	
 	  <div class="container" style="margin-top: 30px;">
       <div class="row">
         <h4 class="text-center">- OR -</h4>
@@ -95,43 +92,52 @@
           </div> 
         </center>
       </div>
-      <div class="row">
-        <center>
-
+		</div>
+		<div class="row">
+      <center>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(4)">4</button>
-            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(5)">5</button>
-            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(6)">6</button>
-          </div>
-        </center>
-      </div>
-      <div class="row">
-        <center>
+          <button type="button" class="btn btn-default btn-keypad" onclick="addInput(1)">1</button>
+          <button type="button" class="btn btn-default btn-keypad" onclick="addInput(2)">2</button>
+          <button type="button" class="btn btn-default btn-keypad" onclick="addInput(3)">3</button>
+        </div> 
+      </center>
+    </div>
+    <div class="row">
+      <center>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default btn-keypad" onclick="addInput(4)">4</button>
+          <button type="button" class="btn btn-default btn-keypad" onclick="addInput(5)">5</button>
+          <button type="button" class="btn btn-default btn-keypad" onclick="addInput(6)">6</button>
+        </div>
+      </center>
+    </div>
+    <div class="row">
+      <center>
 
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(7)">7</button>
-            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(8)">8</button>
-            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(9)">9</button>
-          </div>
-        </center>
-      </div>
-      <div class="row">
-        <center>
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-warning btn-keypad" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-default btn-keypad" onclick="addInput(0)">0</button>
-            <button id="button-enter-withdrawal" type="button" class="btn btn-success btn-keypad" onclick="customWithdraw()"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default btn-keypad" onclick="addInput(7)">7</button>
+          <button type="button" class="btn btn-default btn-keypad" onclick="addInput(8)">8</button>
+          <button type="button" class="btn btn-default btn-keypad" onclick="addInput(9)">9</button>
+        </div>
+      </center>
+    </div>
+    <div class="row">
+      <center>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-warning btn-keypad" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-default btn-keypad" onclick="addInput(0)">0</button>
+          <button id="button-enter-withdrawal" type="button" class="btn btn-success btn-keypad" onclick="customWithdraw()"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
 
-          </div>
-        </center>
-      </div>
-  	</div>
+        </div>
+      </center>
+    </div>
 	
 
   	<script>
 
     var transType = localStorage.getItem("transaction_type");
     var acnt = localStorage.getItem("account"); 
+    document.getElementById("account-type").innerHTML = capitalizeFirstLetter(acnt);
 
   	function addInput(value) {
       var input = document.getElementById("withdrawal-amount").value;
@@ -178,6 +184,10 @@
         alert("Withdrawing: " + amount);
         location.href="main-menu.html";
       }
+    }
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
   	</script>

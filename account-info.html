@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bank Machine</title>
-
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-
+    
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -26,58 +24,42 @@
 
     <!-- Javascript Files -->
     <script type="text/javascript" src="javascript/authentication.js"></script>
+    <script type="text/javascript" src="javascript/account.js"></script>
   </head>
-  <body onload="checkUser()">
+  <body onload="checkUser(); displayInformation();">
   	<div class="container">
       <div class="back" style="position: absolute; float: left;">
-        <a href="main-menu.html">
+        <a href="accounts.html">
           <button type="button" class="btn btn-default">
             <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Back
           </button>
         </a> 
       </div>
-      <div class="row">
+  		<div class="row">
         <h1 class="text-center">Bank Machine UI ATM</h1>
       </div>
-  		<div class="row">
+      <div class="row">
         <div class="col-md-offset-4 col-md-4">
-          <h3 class="text-center highlight">Select an Account</h3>
+          <h3 class="text-center highlight" style="text-decoration: underline;"><span id="account-type"></span> Account Summary</h3>
+        </div>
+      </div>
+  		<div class="row">
+        <div class="col-md-3 col-md-offset-3">
+          <h4 class="text-right">Account Number</h4>
+        </div>
+        <div class="col-md-3">
+          <h4><small id="account-number">####</small></h4>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-offset-4 col-md-4">
-          <button type="button" class="btn btn-default btn-block" onclick="storeAccount('chequing'); navigate();">Chequing</button>
-        </div>
-        <div class="col-md-offset-4 col-md-4">
-          <button type="button" class="btn btn-default btn-block" onclick="storeAccount('savings'); navigate();">Savings</button>
+  			<div class="col-md-3 col-md-offset-3">
+  				<h4 class="text-right">Balance</h4>
+  			</div>
+        <div class="col-md-3">
+          <h4><small id="account-balance">####</small></h4>
         </div>
   		</div>
-
-    <script>
-      var transType = localStorage.getItem("transaction_type");
-
-      function storeAccount(account) {
-        localStorage.setItem("account", account);
-      }
-
-      function navigate() {
-        var nav;
-        switch(transType) {
-          case "withdrawal" :
-            nav = "Withdrawal.html";
-            break;
-          case "deposit" :
-            nav = "Deposit.html"
-            break;
-          case "checkBalance" :
-            nav = "account-info.html"
-        }
-        
-        location.href = nav;
-      }
-
-    </script>
-
+  	</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
