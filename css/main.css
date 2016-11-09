@@ -1,7 +1,5 @@
 body {
-	font-family: sans-serif;
-	background: black;
-	color: white;
+
 }
 
 .vertical-center {
@@ -10,4 +8,26 @@ body {
 
   display: flex;
   align-items: center;
+}
+
+h1 {
+	padding-bottom: 20px;
+}
+
+.btn {
+	width: 100px;
+	height: 50px;
+	margin: 15px 0px;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none !important;
+}
+
+.alert {
+	margin: 20px;
 }

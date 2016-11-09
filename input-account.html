@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bank Machine</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,6 +21,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Javascript Files -->
+    <script type="text/javascript" src="javascript/start.js"></script>
   </head>
   <body>
   	<div class="container">
@@ -31,7 +36,6 @@
   		<div class="row">
         <div class="col-lg-6 col-lg-offset-3">
     			<div class="form-group">
-            <label for="account-number">Account Number</label>
             <p>
               <input id="account-number" type="text" onkeypress="return false" maxlength="16" class="form-control">
               <td><span class="error_form" id="account-number-error-message"></span></td>
@@ -71,13 +75,14 @@
           <div class="btn-group" role="group" aria-label="Basic example">
             <button id="button-edit-account-number" type="button" class="btn btn-warning" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
             <button type="button" class="btn btn-default" onclick="addInput(0)">0</button>
-            <button id="button-enter-account-number" type="button" class="btn btn-success" onclick="location.href='input-pin.html';" disabled><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+            <button id="button-enter-account-number" type="button" class="btn btn-success" onclick="login()" disabled><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
   	</div>
 	
   	<script>
+    checkLength();
 
   	function addInput(value) {
       console.log(value);
@@ -115,6 +120,6 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     
-    <script src="js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
