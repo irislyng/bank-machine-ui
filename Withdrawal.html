@@ -7,6 +7,8 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bank Machine</title>
 
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,95 +21,130 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Javascript Files -->
+    <script type="text/javascript" src="javascript/authentication.js"></script>
   </head>
-  <body>
+  <body onload="checkUser()">
   	<div class="container">
       <div class="row">
-        <h1 class="text-center">Withdrawal</h1>
+        <h1 class="text-center">Bank Machine UI ATM</h1>
+      </div>
+      <div class="row">
+        <h3 class="text-center">Withdraw Cash</h3>
       </div>
   		<div class="row">
         <div class="col-lg-3">
-          <button type="button" class="btn btn-default btn-block">$20</button>
+          <button type="button" class="btn btn-default btn-block" onclick="replaceInput(20)">$20</button>
         </div>
         <div class="col-lg-offset-6 col-lg-3">
-          <button type="button" class="btn btn-default btn-block">$40</button>
+          <button type="button" class="btn btn-default btn-block" onclick="replaceInput(40)">$40</button>
         </div>
   		</div>
   		<div class="row">
         <div class="col-lg-3">
-          <button type="button" class="btn btn-default btn-block">$60</button>
+          <button type="button" class="btn btn-default btn-block" onclick="replaceInput(60)">$60</button>
         </div>
         <div class="col-lg-offset-6 col-lg-3">
-          <button type="button" class="btn btn-default btn-block">$80</button>
+          <button type="button" class="btn btn-default btn-block" onclick="replaceInput(80)">$80</button>
         </div>
-		</div>
-		<div class="row">
-		<div class="col-lg-3">
-		  <button type="button" class="btn btn-default btn-block">$100</button>
-		</div>
-        <div class="col-lg-offset-6 col-lg-3">
-          <button type="button" class="btn btn-default btn-block">$120</button>
-        </div>
+		  </div>
+  		<div class="row">
+  		<div class="col-lg-3">
+  		  <button type="button" class="btn btn-default btn-block" onclick="replaceInput(100)">$100</button>
   		</div>
+          <div class="col-lg-offset-6 col-lg-3">
+            <button type="button" class="btn btn-default btn-block" onclick="replaceInput(120)">$120</button>
+          </div>
+    		</div>
   	</div>
 	
-	<div class="container">
+	 <div class="container">
   		<div class="row">
         <div class="col-lg-6 col-lg-offset-3">
     			<div class="form-group">
             <label for="account-number">Withdrawal Amount</label>
-			<div class="input-group">
-			<div class="input-group-addon">$</div>
-            <input type="number" class="form-control" id="account-number">
-			<div class="input-group-addon">.00</div>
-			</div>
-				</div>
+			      <div class="input-group">
+			        <div class="input-group-addon">$</div>
+              <input id="withdrawal-amount" type="text" onkeypress="return false" class="form-control">
+			        <div class="input-group-addon">.00</div>
+			       </div>
+				  </div>
         </div>
   		</div>
   		<div class="row">
         <center>
-           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(1)">1</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(2)">2</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(3)">3</button>
+            <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(1)">1</button>
+            <button type="button" class="btn btn-default" onclick="addInput(2)">2</button>
+            <button type="button" class="btn btn-default" onclick="addInput(3)">3</button>
           </div> 
         </center>
       </div>
       <div class="row">
         <center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(4)">4</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(5)">5</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(6)">6</button>
-          </div>
-        </center>
-  		</div>
-      <div class="row">
-        <center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(7)">7</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(8)">8</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(9)">9</button>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(4)">4</button>
+            <button type="button" class="btn btn-default" onclick="addInput(5)">5</button>
+            <button type="button" class="btn btn-default" onclick="addInput(6)">6</button>
           </div>
         </center>
       </div>
       <div class="row">
         <center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-default" onclick="myFunction(0)">0</button>
-            <button type="button" class="btn btn-success"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(7)">7</button>
+            <button type="button" class="btn btn-default" onclick="addInput(8)">8</button>
+            <button type="button" class="btn btn-default" onclick="addInput(9)">9</button>
+          </div>
+        </center>
+      </div>
+      <div class="row">
+        <center>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-warning" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-default" onclick="addInput(0)">0</button>
+            <button id="button-enter-withdrawal" type="button" class="btn btn-success"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
   	</div>
 	
-	<script>
-	function myFunction(value) {
-	console.log(value);
-    document.getElementById("account-number").value = document.getElementById("account-number").value + value;
-	}
-	</script>
+  	<script>
+  	function addInput(value) {
+      var input = document.getElementById("withdrawal-amount").value;
+      var length = input.length;
+
+      document.getElementById("withdrawal-amount").value = input + value;
+
+      checkLength();
+    }
+
+    function removeInput() {
+      var input = document.getElementById("withdrawal-amount").value;
+      var length = input.length;
+
+      document.getElementById("withdrawal-amount").value = input.slice(0, length - 1);
+
+      checkLength();
+    }
+
+    function replaceInput(value) {
+      document.getElementById("withdrawal-amount").value = value;
+      
+      checkLength();
+    }
+
+    function checkLength() {
+      var length = document.getElementById("withdrawal-amount").value.length;
+
+      if (length < 1) {
+        document.getElementById("button-enter-withdrawal").disabled = true;
+      } else {
+        document.getElementById("button-enter-withdrawal").disabled = false;
+      }
+    }
+  	</script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
