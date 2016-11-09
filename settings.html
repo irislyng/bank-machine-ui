@@ -10,6 +10,9 @@
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css">
+
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -23,7 +26,14 @@
     <script type="text/javascript" src="javascript/authentication.js"></script>
   </head>
   <body onload="checkUser()">
-  	<div class="container-fluid">
+  	<div class="container">
+      <div class="back" style="position: absolute; float: left;">
+        <a href="main-menu.html">
+          <button type="button" class="btn btn-default">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Back
+          </button>
+        </a> 
+      </div>
   		<div class="row">
         <h1 class="text-center">Bank Machine UI ATM</h1>
       </div>
