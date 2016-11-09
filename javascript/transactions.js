@@ -1,8 +1,9 @@
 
 var currentAccount = localStorage.getItem("current_account_number");
 var user = getLocalUser();
-var chequingBalance = getChequingBalance();
-var savingsBalance = getSavingsBalance();
+var chequingBalance;
+var savingsBalance;
+updateBalances();
 
 function setAccountBalance(value, acntType, transaction, diff, fromAcnt, toAcnt) {
 	// Set the balance of the account and update localStorage.
@@ -26,13 +27,15 @@ function setAccountBalance(value, acntType, transaction, diff, fromAcnt, toAcnt)
 	updateBalances();
 };
 
-function withdraw(fromAcnt, toAct = null, amount) {
+function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 	// Simulate a withdrawl from a certain account (chequing or savings).
 
 	if(fromAcnt == "chequing") {
 		if(chequingBalance < amount) {
 			// TODO: Set up error message.
 			console.log("Error: Insufficient funds to withdraw $" + amount);
+			alert("Insufficient funds to withdraw $" + amount);
+			return false;
 		}
 		var newChequing = chequingBalance - amount;
 		setAccountBalance(newChequing, fromAcnt, "withdrawal", amount, fromAcnt, toAcnt);
@@ -40,6 +43,8 @@ function withdraw(fromAcnt, toAct = null, amount) {
 		if(savingsBalance < amount) {
 			// TODO: Set up error message.
 			console.log("Error: Insufficient funds to withdraw $" + amount);
+			alert("Insufficient funds to withdraw $" + amount);
+			return false;
 		}
 		var newSavingsBalance = savingsBalance - amount;
 		setAccountBalance(newSavingsBalance, fromAcnt,  "withdrawal", amount, fromAcnt, toAcnt);
@@ -49,6 +54,8 @@ function withdraw(fromAcnt, toAct = null, amount) {
 	}
 
 	setLocalUser();
+	return true;
+
 }
 
 function deposit(fromAct = null, toAcnt, amount) {

@@ -15,6 +15,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css">
 
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,22 +40,42 @@
         <h1 class="text-center">Accounts</h1>
       </div>
   		<div class="row">
-        <div class="col-lg-3">
-          <button type="button" class="btn btn-default btn-block">Chequing</button>
+        <div class="col-lg-4">
+          <button type="button" class="btn btn-default btn-block" onclick="storeAccount('chequing'); navigate();">Chequing</button>
         </div>
-        <div class="col-lg-offset-6 col-lg-3">
-          <button type="button" class="btn btn-default btn-block">Savings</button>
+
+        <div class="col-lg-4">
+          <h3 class="text-center highlight">Select an Account</h3>
         </div>
-  		</div>
-		<div class="row">
-        <div class="col-lg-3">
-          <button type="button" class="btn btn-default btn-block">USD</button>
-        </div>
-        <div class="col-lg-offset-6 col-lg-3">
-          <button type="button" class="btn btn-default btn-block">Mastercard</button>
+
+        <div class="col-lg-4">
+          <button type="button" class="btn btn-default btn-block" onclick="storeAccount('savings'); navigate();">Savings</button>
         </div>
   		</div>
-  	</div>
+
+
+    <script>
+      var transType = localStorage.getItem("transaction_type");
+
+      function storeAccount(account) {
+        localStorage.setItem("account", account);
+      }
+
+      function navigate() {
+        var nav;
+        switch(transType) {
+          case "withdrawal" :
+            nav = "Withdrawal.html";
+            break;
+          case "deposit" :
+            nav = "Deposit.html"
+            break;
+        }
+        location.href = nav;
+      }
+
+    </script>
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
