@@ -15,6 +15,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css">
 
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,10 +33,15 @@
         <h1 class="text-center">Accounts</h1>
       </div>
   		<div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-4">
           <button type="button" class="btn btn-default btn-block" onclick="storeAccount('chequing'); navigate();">Chequing</button>
         </div>
-        <div class="col-lg-offset-6 col-lg-3">
+
+        <div class="col-lg-4">
+          <h3 class="text-center highlight">Select an Account</h3>
+        </div>
+
+        <div class="col-lg-4">
           <button type="button" class="btn btn-default btn-block" onclick="storeAccount('savings'); navigate();">Savings</button>
         </div>
   		</div>
