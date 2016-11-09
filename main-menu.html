@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bank Machine</title>
-
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-
+    
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="javascript/authentication.js"></script>
     <script type="text/javascript" src="javascript/main.js"></script>
   </head>
-  <body onload="checkUser()">
+  <body onload="checkUser(); init();">
   	<div class="container">
       <div class="row">
         <h1 class="text-center">Bank Machine UI ATM</h1>
@@ -38,7 +38,7 @@
           </a>
         </div>
         <div class="col-lg-4">
-          <h3 class="text-center">Welcome, <span id="user-name">Name</span>.</h3>
+          <h3 class="text-center highlight">Welcome, <span id="user-name">Name</span>.</h3>
         </div>
         <div class="col-lg-4">
           <a href="withdrawal.html">
@@ -65,7 +65,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4">
-          <button type="button" class="btn btn-default btn-block" onclick="logout()">Logout</button>
+          <button type="button" class="btn btn-default btn-block btn-danger" onclick="logout()">Logout</button>
         </div>
         <div class="col-lg-offset-4 col-lg-4">
           <button type="button" class="btn btn-default btn-block">Accounts</button>
