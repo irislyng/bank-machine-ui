@@ -25,7 +25,7 @@
     <!-- Javascript Files -->
     <script type="text/javascript" src="javascript/authentication.js"></script>
   </head>
-  <body onload="checkUser()">
+  <body onload="checkUser(); init();">
   	<div class="container">
       <div class="back" style="position: absolute; float: left;">
         <a href="accounts.html">
@@ -39,6 +39,9 @@
       </div>
       <div class="row">
         <h3 class="text-center">Withdraw Fast Cash from <span id="account-type"></span></h3>
+      </div>
+      <div class="row">
+        <p class="text-center">Current Balance: $<span id="account-balance"></span></p>
       </div>
   		<div class="row">
         <div class="col-md-offset-3 col-md-3">
@@ -126,7 +129,7 @@
   	<script>
 
     var transType = localStorage.getItem("transaction_type");
-    var acnt = localStorage.getItem("account"); 
+    var acnt = localStorage.getItem("account");
     document.getElementById("account-type").innerHTML = capitalizeFirstLetter(acnt);
 
   	function addInput(value) {
