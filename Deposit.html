@@ -24,6 +24,7 @@
 
     <!-- Javascript Files -->
     <script type="text/javascript" src="javascript/authentication.js"></script>
+    <script type="text/javascript" src="javascript/transactions.js"></script>
   </head>
   <body onload="checkUser()">
   	<div class="container">
@@ -38,23 +39,9 @@
         <h1 class="text-center">Bank Machine UI ATM</h1>
       </div>
       <div class="row">
-        <h3 class="text-center">Deposit Cheque/Cash</h3>
+        <h3 class="text-center">Deposit Cheque/Cash into <span id="account-type"></span></h3>
       </div>
-  		<div class="row">
-          <div class="col-lg-6 col-lg-offset-3">
-  			<div class="form-group">
-  			<label for="sel1">Deposit To:</label>
-  			<select class="form-control" id="sel1">
-  			<option>Chequing</option>
-  			<option>Savings</option>
-  			<option>USD</option>
-  			<option>Mastercard</option>
-  		  </select>
-  			</div>
-          </div>
-  		</div>
-  	</div>
-
+    </div>
   	<div class="container">
   		<div class="row">
         <div class="col-lg-offset-3 col-lg-6">
@@ -100,13 +87,18 @@
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-warning btn-keypad" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
             <button type="button" class="btn btn-default btn-keypad" onclick="addInput(0)">0</button>
-            <button id="button-enter-deposit" type="button" class="btn btn-success btn-keypad"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+            <button id="button-enter-deposit" type="button" class="btn btn-success btn-keypad" onclick="depositAmount()"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
   	</div>
   	
   	<script>
+
+    var transType = localStorage.getItem("transaction_type");
+    var acnt = localStorage.getItem("account"); 
+    document.getElementById("account-type").innerHTML = capitalizeFirstLetter(acnt);
+
   	function addInput(value) {
       var input = document.getElementById("deposit-amount").value;
       var length = input.length;
@@ -133,6 +125,26 @@
       } else {
         document.getElementById("button-enter-deposit").disabled = false;
       }
+    }
+
+    function depositAmount() {
+      console.log("depositing..")
+      amount = document.getElementById("deposit-amount").value;
+      var success = deposit(null, acnt, amount);
+      depositMessage(success, amount);
+    }
+
+    function depositMessage(success, amount) {
+      if(success) {
+        alert("Depositing: " + amount);
+        location.href="main-menu.html";
+      } else {
+        location.href="main-menu.html";
+      }
+    }
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
   	</script>
 

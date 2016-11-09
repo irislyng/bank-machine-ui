@@ -37,8 +37,8 @@ function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 			alert("Insufficient funds to withdraw $" + amount);
 			return false;
 		}
-		var newChequing = chequingBalance - amount;
-		setAccountBalance(newChequing, fromAcnt, "withdrawal", amount, fromAcnt, toAcnt);
+		var newChequingBalance = chequingBalance - amount;
+		setAccountBalance(newChequingBalance, fromAcnt, "withdrawal", amount, fromAcnt, toAcnt);
 	} else if(fromAcnt == "savings"){
 		if(savingsBalance < amount) {
 			// TODO: Set up error message.
@@ -58,21 +58,28 @@ function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 
 }
 
-function deposit(fromAct = null, toAcnt, amount) {
+function deposit(fromAcnt = null, toAcnt, amount) {
 	// Simulate a deposit to a certain account (chequing or savings).
 
+	// Convert text input to number.
+	amount = parseInt(amount);
+
 	if(toAcnt == "chequing") {
-		chequingBalance = chequingBalance + amount;
-		setAccountBalance(chequingBalance, toAcnt, "deposit", amount, fromAcnt, toAcnt);
+		var newChequingBalance = chequingBalance + amount;
+		setAccountBalance(newChequingBalance, toAcnt, "deposit", amount, fromAcnt, toAcnt);
+		return true;
 	} else if(toAcnt == "savings") {
-		savingsBalance = savingsBalance + amount;
-		setAccountBalance(savingsBalance, toAcnt, "deposit", amount, fromAcnt, toAcnt);
+		var newSavingsBalance = savingsBalance + amount;
+		setAccountBalance(newSavingsBalance, toAcnt, "deposit", amount, fromAcnt, toAcnt);
+		return true;
 	} else {
 		// this will never be hit unless you're a hacker
 		console.log("Error: Not An Account.");
+		return false;
 	}
 
 	setLocalUser();
+	return true;
 }
 
 function transferFunds(fromAcnt, toAcnt, amount) {
@@ -97,8 +104,9 @@ function setLocalUser() {
 }
 
 function updateBalances() {
-	chequingBalance = user["accounts"]["chequing"]["balance"];
-	savingsBalance = user["accounts"]["savings"]["balance"];
+	chequingBalance = parseInt(user["accounts"]["chequing"]["balance"]);
+	console.log(typeof(chequingBalance))
+	savingsBalance = parseInt(user["accounts"]["savings"]["balance"]);
 }
 
 
