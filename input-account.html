@@ -22,87 +22,99 @@
   </head>
   <body>
   	<div class="container">
+    <div class="row">
+        <h1 class="text-center">Bank Machine UI ATM</h1>
+      </div>
       <div class="row">
-        <h1 class="text-center">Welcome</h1>
+        <h4 class="text-center">Please enter your 16-digit account number.</h4>
       </div>
   		<div class="row">
         <div class="col-lg-6 col-lg-offset-3">
     			<div class="form-group">
             <label for="account-number">Account Number</label>
-            <p><input type="number" class="form-control" id="account-number"><td><span class="error_form" id="account-number_error_message"></span></td><p>
+            <p>
+              <input id="account-number" type="text" onkeypress="return false" maxlength="16" class="form-control">
+              <td><span class="error_form" id="account-number-error-message"></span></td>
+            </p>
           </div>
         </div>
   		</div>
   		<div class="row">
         <center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(1)">1</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(2)">2</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(3)">3</button>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(1)">1</button>
+            <button type="button" class="btn btn-default" onclick="addInput(2)">2</button>
+            <button type="button" class="btn btn-default" onclick="addInput(3)">3</button>
           </div> 
         </center>
       </div>
       <div class="row">
         <center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(4)">4</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(5)">5</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(6)">6</button>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(4)">4</button>
+            <button type="button" class="btn btn-default" onclick="addInput(5)">5</button>
+            <button type="button" class="btn btn-default" onclick="addInput(6)">6</button>
           </div>
         </center>
   		</div>
       <div class="row">
         <center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(7)">7</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(8)">8</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(9)">9</button>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(7)">7</button>
+            <button type="button" class="btn btn-default" onclick="addInput(8)">8</button>
+            <button type="button" class="btn btn-default" onclick="addInput(9)">9</button>
           </div>
         </center>
       </div>
       <div class="row">
         <center>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-default" onclick="myFunction(0)">0</button>
-            <button type="button" class="btn btn-success"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+            <button id="button-edit-account-number" type="button" class="btn btn-warning" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-default" onclick="addInput(0)">0</button>
+            <button id="button-enter-account-number" type="button" class="btn btn-success" onclick="location.href='input-pin.html';" disabled><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
   	</div>
 	
-	<script>
-	function myFunction(value) {
-	console.log(value);
-    document.getElementById("account-number").value = document.getElementById("account-number").value + value;
-	check_account_number();
-	}
-	</script>
+  	<script>
+
+  	function addInput(value) {
+      console.log(value);
+      var input = document.getElementById("account-number").value;
+      var length = input.length;
+
+      if (length < 16) {
+        document.getElementById("account-number").value = input + value;
+      } 
+
+      checkLength();
+  	}
+
+    function removeInput() {
+      var input = document.getElementById("account-number").value;
+      var length = input.length;
+
+      document.getElementById("account-number").value = input.slice(0, length - 1);
+
+      checkLength();
+    }
+
+    function checkLength() {
+      var length = document.getElementById("account-number").value.length;
+
+      if (length < 16) {
+        document.getElementById("button-enter-account-number").disabled = true;
+      } else {
+        document.getElementById("button-enter-account-number").disabled = false;
+      }
+    }
+
+  	</script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script>
-		
-		$("#account-number_error_message").hide();
-		
-		var error_account_number = false;
-		
-		function check_account_number() {
-		
-		var account_number_length = $("#account-number").val().length;
-		
-		if(account_number_length < 16) {
-		$("#account-number_error_message").html("Incorrect Account Number");
-		$("#account-number_error_message").show();
-		error_account_number = true;
-		} else if(account_number_length > 16){
-		$("#account-number_error_message").prop('disabled', true);
-		} else {
-		$("#account-number_error_message").hide();
-		}
-	}
-	</script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
