@@ -21,6 +21,9 @@ function login() {
 
 			// Update local storage with new pin.
 			localStorage.setItem(account_number, JSON.stringify(user));
+
+			// TODO: Set up success functionality.
+			location.href="main-menu.html"
 		} else { // Pin exists for current user.
 			if (user.pin == pin_number) {
 				// TODO: Set up success functionality.
