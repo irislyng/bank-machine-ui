@@ -128,8 +128,7 @@
     }
 
     function depositAmount() {
-      console.log("depositing..")
-      amount = document.getElementById("deposit-amount").value;
+      amount = +document.getElementById("deposit-amount").value;
       var success = deposit(null, acnt, amount);
       depositMessage(success, amount);
     }

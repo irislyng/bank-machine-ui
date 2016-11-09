@@ -45,28 +45,30 @@
     			<div class="form-group">
 				<label for="current-pin-number">Enter Current Pin Number</label>
             <input id="current-pin-number" type="password" onkeypress="return false" maxlength="4" class="form-control" onclick="pointerAt(this.id)">
-            <div id="current-pin-number-error-message" class="alert alert-danger" hidden=""></div>
           </div>
         </div>
   		</div>
-		<div class="row">
+		  <div class="row">
         <div class="col-md-offset-4 col-md-4">
     			<div class="form-group">
 				<label for="new-pin-number">Enter New Pin Number</label>
             <input id="new-pin-number" type="password" onkeypress="return false" maxlength="4" class="form-control" onclick="pointerAt(this.id)">
-            <div id="new-pin-number-error-message" class="alert alert-danger" hidden=""></div>
           </div>
         </div>
   		</div>
-		<div class="row">
+  		<div class="row">
         <div class="col-md-offset-4 col-md-4">
     			<div class="form-group">
-				<label for="confirm-new-pin-number">Confirm New Pin Number</label>
+  			<label for="confirm-new-pin-number">Confirm New Pin Number</label>
             <input id="confirm-new-pin-number" type="password" onkeypress="return false" maxlength="4" class="form-control" onclick="pointerAt(this.id)">
-            <div id="confirm-pin-number-error-message" class="alert alert-danger" hidden=""></div>
           </div>
         </div>
   		</div>
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+          <div id="pin-number-error-message" class="alert alert-danger text-center" hidden=""></div>
+        </div>
+      </div>
   		<div class="row">
         <center>
             <div class="btn-group" role="group">
@@ -105,49 +107,51 @@
       </div>
   	</div>
 	
-	<script>
-	var pointer;
-	function pointerAt(id) {
-		pointer = id;
-	}
-	
-	function performChangePin() {
-		var currentPin = parseInt(document.getElementById("current-pin-number").value);
-		var newPin = parseInt(document.getElementById("new-pin-number").value);
-		var confirmedPin = parseInt(document.getElementById("confirm-new-pin-number").value);
-	}
-	
-	function addInput(value) {
-      var input = document.getElementById(pointer).value;
-      var length = input.length;
-      if (length < 4) {
-        document.getElementById(pointer).value = input + value;
-      } 
+  	<script>
+  	var pointer;
+  	function pointerAt(id) {
+  		pointer = id;
+  	}
+  	
+  	function performChangePin() {
+  		var currentPin = parseInt(document.getElementById("current-pin-number").value);
+  		var newPin = parseInt(document.getElementById("new-pin-number").value);
+  		var confirmedPin = parseInt(document.getElementById("confirm-new-pin-number").value);
 
-      checkLength();
-    }
+      changePin(currentPin, newPin, confirmedPin);
+  	}
+  	
+  	function addInput(value) {
+        var input = document.getElementById(pointer).value;
+        var length = input.length;
+        if (length < 4) {
+          document.getElementById(pointer).value = input + value;
+        } 
 
-    function removeInput() {
-      var input = document.getElementById(pointer).value;
-      var length = input.length;
-
-      document.getElementById(pointer).value = input.slice(0, length - 1);
-
-      checkLength();
-    }
-
-    function checkLength() {
-      var currentPinLength = document.getElementById("current-pin-number").value.length;
-      var newPinLength = document.getElementById("new-pin-number").value.length;
-      var confirmedPinLength = document.getElementById("confirm-new-pin-number").value.length;
-
-      if (currentPinLength < 4 || newPinLength < 4 || confirmedPinLength < 4) {
-        document.getElementById("button-enter-pin-number").disabled = true;
-      } else {
-        document.getElementById("button-enter-pin-number").disabled = false;
+        checkLength();
       }
-    }
-	</script>
+
+      function removeInput() {
+        var input = document.getElementById(pointer).value;
+        var length = input.length;
+
+        document.getElementById(pointer).value = input.slice(0, length - 1);
+
+        checkLength();
+      }
+
+      function checkLength() {
+        var currentPinLength = document.getElementById("current-pin-number").value.length;
+        var newPinLength = document.getElementById("new-pin-number").value.length;
+        var confirmedPinLength = document.getElementById("confirm-new-pin-number").value.length;
+
+        if (currentPinLength < 4 || newPinLength < 4 || confirmedPinLength < 4) {
+          document.getElementById("button-enter-pin-number").disabled = true;
+        } else {
+          document.getElementById("button-enter-pin-number").disabled = false;
+        }
+      }
+  	</script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
