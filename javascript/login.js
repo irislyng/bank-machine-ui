@@ -9,7 +9,6 @@ function init() {
 
 function login() {
 	var pin_number = +document.getElementById("pin-number").value;
-	
 
 	// Validate PIN.
 	var isValid = validate(pin_number);

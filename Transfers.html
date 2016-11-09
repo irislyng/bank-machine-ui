@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bank Machine</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,11 +21,17 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Javascript Files -->
+    <script type="text/javascript" src="javascript/authentication.js"></script>
   </head>
-  <body>
+  <body onload="checkUser()">
   	<div class="container">
       <div class="row">
-        <h1 class="text-center">Transfers</h1>
+        <h1 class="text-center">Bank Machine UI ATM</h1>
+      </div>
+      <div class="row">
+        <h3 class="text-center">Transfers</h3>
       </div>
   		<div class="row">
         <div class="col-lg-6 col-lg-offset-3">
@@ -61,7 +69,7 @@
             <label for="account-number">Amount to Transfer:</label>
 			<div class="input-group">
 			<div class="input-group-addon">$</div>
-            <input type="number" class="form-control" id="account-number">
+            <input id="transfer-amount" type="text" onkeypress="return false" class="form-control">
 			<div class="input-group-addon">.00</div>
           </div>
         </div>
@@ -69,41 +77,71 @@
 		</div>
   		<div class="row">
         <center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default">1</button>
-            <button type="button" class="btn btn-default">2</button>
-            <button type="button" class="btn btn-default">3</button>
+            <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(1)">1</button>
+            <button type="button" class="btn btn-default" onclick="addInput(2)">2</button>
+            <button type="button" class="btn btn-default" onclick="addInput(3)">3</button>
+          </div> 
+        </center>
+      </div>
+      <div class="row">
+        <center>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(4)">4</button>
+            <button type="button" class="btn btn-default" onclick="addInput(5)">5</button>
+            <button type="button" class="btn btn-default" onclick="addInput(6)">6</button>
+          </div>
+        </center>
+      </div>
+      <div class="row">
+        <center>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick="addInput(7)">7</button>
+            <button type="button" class="btn btn-default" onclick="addInput(8)">8</button>
+            <button type="button" class="btn btn-default" onclick="addInput(9)">9</button>
           </div>
         </center>
       </div>
       <div class="row">
         <center>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default">4</button>
-            <button type="button" class="btn btn-default">5</button>
-            <button type="button" class="btn btn-default">6</button>
-          </div>
-        </center>
-  		</div>
-      <div class="row">
-        <center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default">7</button>
-            <button type="button" class="btn btn-default">8</button>
-            <button type="button" class="btn btn-default">9</button>
-          </div>
-        </center>
-      </div>
-      <div class="row">
-        <center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-default">0</button>
-            <button type="button" class="btn btn-success"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-warning" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-default" onclick="addInput(0)">0</button>
+            <button id="button-enter-transfer" type="button" class="btn btn-success" disabled"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
   	</div>	
+
+    <script>
+    function addInput(value) {
+        var input = document.getElementById("transfer-amount").value;
+        var length = input.length;
+
+        document.getElementById("transfer-amount").value = input + value;
+
+        checkLength();
+      }
+
+      function removeInput() {
+        var input = document.getElementById("transfer-amount").value;
+        var length = input.length;
+
+        document.getElementById("transfer-amount").value = input.slice(0, length - 1);
+
+        checkLength();
+      }
+
+      function checkLength() {
+        var length = document.getElementById("transfer-amount").value.length;
+
+        if (length < 1) {
+          document.getElementById("button-enter-transfer").disabled = true;
+        } else {
+          document.getElementById("button-enter-transfer").disabled = false;
+        }
+      }
+    </script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

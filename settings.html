@@ -6,14 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bank Machine</title>
-
+    
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,25 +23,22 @@
     <script type="text/javascript" src="javascript/authentication.js"></script>
   </head>
   <body onload="checkUser()">
-  	<div class="container">
+  	<div class="container-fluid">
+  		<div class="row">
+        <h1 class="text-center">Bank Machine UI ATM</h1>
+      </div>
       <div class="row">
-        <h1 class="text-center">Accounts</h1>
+        <h3 class="text-center">Account Settings</h3>
       </div>
   		<div class="row">
-        <div class="col-lg-3">
-          <button type="button" class="btn btn-default btn-block">Chequing</button>
-        </div>
-        <div class="col-lg-offset-6 col-lg-3">
-          <button type="button" class="btn btn-default btn-block">Savings</button>
-        </div>
-  		</div>
-		<div class="row">
-        <div class="col-lg-3">
-          <button type="button" class="btn btn-default btn-block">USD</button>
-        </div>
-        <div class="col-lg-offset-6 col-lg-3">
-          <button type="button" class="btn btn-default btn-block">Mastercard</button>
-        </div>
+  			<div class="col-md-offset-4 col-md-4">
+  				<a href="#">
+  					<button type="button" class="btn btn-default btn-block">View Account History</button>
+  				</a>
+          <a href="#">
+            <button type="button" class="btn btn-default btn-block">Change PIN Number</button>
+          </a>
+  			</div>
   		</div>
   	</div>
 
