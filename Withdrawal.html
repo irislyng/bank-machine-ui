@@ -27,26 +27,26 @@
       </div>
   		<div class="row">
         <div class="col-lg-3">
-          <button type="button" class="btn btn-default btn-block">$20</button>
+          <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(20);">$20</button>
         </div>
         <div class="col-lg-offset-6 col-lg-3">
-          <button type="button" class="btn btn-default btn-block">$40</button>
+          <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(40)">$40</button>
         </div>
   		</div>
   		<div class="row">
         <div class="col-lg-3">
-          <button type="button" class="btn btn-default btn-block">$60</button>
+          <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(60)">$60</button>
         </div>
         <div class="col-lg-offset-6 col-lg-3">
-          <button type="button" class="btn btn-default btn-block">$80</button>
+          <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(80)">$80</button>
         </div>
 		</div>
 		<div class="row">
 		<div class="col-lg-3">
-		  <button type="button" class="btn btn-default btn-block">$100</button>
+		  <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(100)">$100</button>
 		</div>
         <div class="col-lg-offset-6 col-lg-3">
-          <button type="button" class="btn btn-default btn-block">$120</button>
+          <button type="button" class="btn btn-default btn-block" onclick="fastWithdraw(120)">$120</button>
         </div>
   		</div>
   	</div>
@@ -55,10 +55,10 @@
   		<div class="row">
         <div class="col-lg-6 col-lg-offset-3">
     			<div class="form-group">
-            <label for="account-number">Withdrawal Amount</label>
+            <label for="withdraw_amount">Withdrawal Amount</label>
 			<div class="input-group">
 			<div class="input-group-addon">$</div>
-            <input type="number" class="form-control" id="account-number">
+            <input type="number" class="form-control" id="withdraw_amount">
 			<div class="input-group-addon">.00</div>
 			</div>
 				</div>
@@ -67,51 +67,75 @@
   		<div class="row">
         <center>
            <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(1)">1</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(2)">2</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(3)">3</button>
+            <button type="button" class="btn btn-default" onclick="addInput(1)">1</button>
+            <button type="button" class="btn btn-default" onclick="addInput(2)">2</button>
+            <button type="button" class="btn btn-default" onclick="addInput(3)">3</button>
           </div> 
         </center>
       </div>
       <div class="row">
         <center>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(4)">4</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(5)">5</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(6)">6</button>
+            <button type="button" class="btn btn-default" onclick="addInput(4)">4</button>
+            <button type="button" class="btn btn-default" onclick="addInput(5)">5</button>
+            <button type="button" class="btn btn-default" onclick="addInput(6)">6</button>
           </div>
         </center>
   		</div>
       <div class="row">
         <center>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default" onclick="myFunction(7)">7</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(8)">8</button>
-            <button type="button" class="btn btn-default" onclick="myFunction(9)">9</button>
+            <button type="button" class="btn btn-default" onclick="addInput(7)">7</button>
+            <button type="button" class="btn btn-default" onclick="addInput(8)">8</button>
+            <button type="button" class="btn btn-default" onclick="addInput(9)">9</button>
           </div>
         </center>
       </div>
       <div class="row">
         <center>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-default" onclick="myFunction(0)">0</button>
-            <button type="button" class="btn btn-success"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-warning" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-default" onclick="addInput(0)">0</button>
+            <button type="button" class="btn btn-success" disabled onclick="location.href='main-menu.html'">><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
   	</div>
 	
 	<script>
-	function myFunction(value) {
-	console.log(value);
-    document.getElementById("account-number").value = document.getElementById("account-number").value + value;
-	}
+    var transType = localStorage.getItem("transaction_type");
+    var acnt = localStorage.getItem("account"); 
+
+  	function addInput(value) {
+      console.log(value);
+      document.getElementById("withdraw_amount").value = document.getElementById("withdraw_amount").value + value;
+  	}
+
+    function removeInput() {
+      var input = document.getElementById("withdraw_amount").value;
+      var length = input.length;
+      document.getElementById("withdraw_amount").value = input.slice(0, length - 1);
+      // checkLength();
+    }
+
+    function fastWithdraw(amount) {
+      withdraw(acnt, null, amount);
+    }
+
+    function customWithdraw() {
+      amount = document.getElementById("withdraw_amount").value;
+      withdraw(acnt, null, amount);
+    }
+
 	</script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Load necessary javascript files for logic -->
+    <script src="javascript/transactions.js"></script>
+
   </body>
 </html>

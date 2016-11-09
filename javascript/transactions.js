@@ -27,13 +27,15 @@ function setAccountBalance(value, acntType, transaction, diff, fromAcnt, toAcnt)
 	updateBalances();
 };
 
-function withdraw(fromAcnt, toAct = null, amount) {
+function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 	// Simulate a withdrawl from a certain account (chequing or savings).
 
 	if(fromAcnt == "chequing") {
 		if(chequingBalance < amount) {
 			// TODO: Set up error message.
 			console.log("Error: Insufficient funds to withdraw $" + amount);
+			getElementById(error_id).innerHTML = "Error: Insufficient funds to withdraw $" + amount
+			return 
 		}
 		var newChequing = chequingBalance - amount;
 		setAccountBalance(newChequing, fromAcnt, "withdrawal", amount, fromAcnt, toAcnt);
@@ -41,6 +43,7 @@ function withdraw(fromAcnt, toAct = null, amount) {
 		if(savingsBalance < amount) {
 			// TODO: Set up error message.
 			console.log("Error: Insufficient funds to withdraw $" + amount);
+			return 
 		}
 		var newSavingsBalance = savingsBalance - amount;
 		setAccountBalance(newSavingsBalance, fromAcnt,  "withdrawal", amount, fromAcnt, toAcnt);
