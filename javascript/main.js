@@ -1,4 +1,7 @@
-function init(account_number) {
+
+function login() {
+	var account_number = +document.getElementById("account-number").value;
+
 	// Validate input.
 	var isValid = validate(account_number);
 
@@ -9,12 +12,13 @@ function init(account_number) {
 
 		// Get local existing user if it exists.
 		var user = getLocalUser(account_number);
+
+		location.href="input-pin.html"
 	} else {
 		// TODO: Set up error message.
 		console.log("Error: account number could not be validated.")
 	}
 }
-
 
 function validate(account_number) {
 	return Number.isInteger(account_number) && account_number.toString().length == 16;
