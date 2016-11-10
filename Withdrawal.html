@@ -170,7 +170,7 @@
     
     function customWithdraw() {
       amount = document.getElementById("withdrawal-amount").value;
-      var success = withdraw(acnt, null, amount);
+      var success = withdraw(acnt, null, amount, "withdrawal-amount-error-message");
       if (success) {
         withdrawalReceipt(acnt, amount);
       }
