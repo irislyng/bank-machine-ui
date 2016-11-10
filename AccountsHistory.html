@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bank Machine</title>
+    
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Javascript Files -->
+    <script type="text/javascript" src="javascript/main.js"></script>
+	<script type="text/javascript" src="javascript/transactions.js"></script>
+	<script type="text/javascript" src="javascript/authentication.js"></script>
+  </head>
+  <body onload="checkUser(); init();">
+  <div class="container">
+	<div class="back" style="position: absolute; float: left;">
+        <a href="settings.html">
+          <button type="button" class="btn btn-default">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Back
+          </button>
+        </a> 
+      </div>
+      <div class="row">
+        <h1 class="text-center">Bank Machine UI ATM</h1>
+      </div>
+	  <div class="row">
+        <h3 class="text-center">Account History <span id="account-type"></span></h3>
+      </div>
+	<div class="row">
+		<div class="col-md-offset-3 col-md-6">
+		<p class="text-center"><span id="account-history"></span></p>
+	</div>
+	</div>
+	<table id="historytable" class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>From </th>
+				<th>To </th>
+				<th>Transaction Type </th>
+				<th>Amount </th>
+				<th>Current Balance </th>
+				<th>Date </th>
+			</tr>
+		</thead>
+		<tbody id="TableBody">
+		</tbody>
+	</table>
+	</div>
+
+	<script>
+	
+	var CurrentAccountNumber = localStorage.getItem("current_account_number");
+	var user = getLocalUser();
+	
+	function getLocalUser(){
+		return JSON.parse(localStorage.getItem(currentAccount));
+	}
+	
+	var AccountHistory = user["history"];
+	var arrayLength = AccountHistory.length;
+	<!-- document.write('<table>');
+<!-- 	document.write('<tr><th> From: </th><th> To: </th><th> Transaction Type: </th><th> Amount: </th><th> Current Balance: </th><th> Date: </th></tr>'); --> -->
+	
+	//for (var i = 0; i < arrayLength; i++) {
+		//document.write('<tr><td> +  accountElement["from"] + </td><td>accountElement["to"] </td><td> accountElement["transaction_type"] </td><td> accountElement["amount"] </td><td> accountElement["current_balance"] </td><td> accountElement["date"] </td></tr>');
+	//}
+	
+		//temp = temp + "<p>" + "From: " + accountElement["from"] + "</p>" + 
+				//"<p>" + "To: " + accountElement["to"] + "</p>" + 
+				//"<p>" + "Transaction Type: " + accountElement["transaction_type"] + "</p>" +
+				//"<p>" + "Amount: " + accountElement["amount"] + "</p>" +
+				//"<p>" + "Current Balance: " + accountElement["current_balance"] + "</p>" + 
+				//"<p>" + "Date: " + accountElement["date"] + "</p>";
+		//document.getElementById("account-history").innerHTML = temp;
+	//document.write('</table>');
+	
+	function CreateTable() {
+		var tbd = document.getElementById("TableBody");
+		for (var i = 0; i < arrayLength; i++) {
+			var accountElement = JSON.parse(AccountHistory[i]);
+			var tr = document.createElement('tr');
+			var td1 = document.createElement('td');
+			var td2 = document.createElement('td');
+			var td3 = document.createElement('td');
+			var td4 = document.createElement('td');
+			var td5 = document.createElement('td');
+			var td6 = document.createElement('td');
+			td1.appendChild(document.createTextNode(accountElement["from"]));
+			td2.appendChild(document.createTextNode(accountElement["to"]));
+			td3.appendChild(document.createTextNode(accountElement["transaction_type"]));
+			td4.appendChild(document.createTextNode(accountElement["amount"]));
+			td5.appendChild(document.createTextNode(accountElement["current_balance"]));
+			td6.appendChild(document.createTextNode(accountElement["date"]));
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			tr.appendChild(td3);
+			tr.appendChild(td4);
+			tr.appendChild(td5);
+			tr.appendChild(td6);
+			tbd.appendChild(tr);
+		}
+	}
+	
+	CreateTable();
+	
+	</script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
