@@ -79,8 +79,8 @@
 			        <div class="input-group-addon">$</div>
               <input id="withdrawal-amount" type="text" onkeypress="return false" class="form-control">
 			        <div class="input-group-addon">.00</div>
-			       </div>
-             <div id="withdrawal-amount-error-message" class="alert alert-danger" hidden=""></div>
+              </div>
+            <div id="withdrawal-amount-error-message" class="alert alert-danger" hidden=""></div>
 				  </div>
 
         </div>
@@ -119,7 +119,7 @@
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-warning btn-keypad" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
           <button type="button" class="btn btn-default btn-keypad" onclick="addInput(0)">0</button>
-          <button id="button-enter-withdrawal" type="button" class="btn btn-success btn-keypad" onclick="customWithdraw()"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+          <button id="button-enter-withdrawal" type="button" class="btn btn-success btn-keypad" disabled="true"onclick="customWithdraw()"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
 
         </div>
       </center>
