@@ -42,6 +42,19 @@
           <br>
           <span class="pull-left">Balance:</span>
           <span class="pull-right" id="balance"></span>
+          <br>
+          <br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+          <span class="pull-left" hidden id="account-label">Account:</span>
+          <span class="pull-right" id="to-account"></span>
+          <br>
+          <span class="pull-right" id="to-action"></span>
+          <br>
+          <span class="pull-left" hidden id="balance-label">Balance:</span>
+          <span class="pull-right" id="to-balance"></span>
         </div>
       </div>
       <div class="row">
@@ -62,9 +75,24 @@
         receipt = JSON.parse(localStorage.getItem("receipt"));
 
         if (receipt["type"] == "withdrawal") {
-          document.getElementById("account").innerText = receipt["account"];
           document.getElementById("action").innerText = "- " + receipt["amount"];
+          document.getElementById("account").innerText = receipt["account"];
           document.getElementById("balance").innerText = receipt["balance"];
+        } else if (receipt["type"] == "deposit") {
+          document.getElementById("action").innerText = "+ " + receipt["amount"];
+          document.getElementById("account").innerText = receipt["account"];
+          document.getElementById("balance").innerText = receipt["balance"];
+        } else {
+          document.getElementById("account-label").removeAttribute("hidden");
+          document.getElementById("balance-label").removeAttribute("hidden");
+
+          document.getElementById("action").innerText = "- " + receipt["amount"];
+          document.getElementById("account").innerText = receipt["fromAccount"]["account"];
+          document.getElementById("balance").innerText = receipt["fromAccount"]["balance"];
+
+          document.getElementById("to-action").innerText = "+ " + receipt["amount"];
+          document.getElementById("to-account").innerText = receipt["toAccount"]["account"];
+          document.getElementById("to-balance").innerText = receipt["toAccount"]["balance"];
         }
       }
 

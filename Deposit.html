@@ -25,6 +25,8 @@
     <!-- Javascript Files -->
     <script type="text/javascript" src="javascript/authentication.js"></script>
     <script type="text/javascript" src="javascript/transactions.js"></script>
+    <script type="text/javascript" src="javascript/receipt.js"></script>
+
   </head>
   <body onload="checkUser(); init();">
   	<div class="container">
@@ -133,7 +135,9 @@
     function depositAmount() {
       amount = +document.getElementById("deposit-amount").value;
       var success = deposit(null, acnt, amount);
-      depositMessage(success, amount);
+      if(success) {
+        depositReceipt(acnt, amount);
+      }
     }
 
     function depositMessage(success, amount) {
