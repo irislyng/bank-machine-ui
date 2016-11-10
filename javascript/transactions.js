@@ -5,6 +5,11 @@ var chequingBalance;
 var savingsBalance;
 updateBalances();
 
+function init() {
+	var account = localStorage.getItem("account");
+	document.getElementById("account-balance").innerHTML = user["accounts"][account]["balance"];
+}
+
 function setAccountBalance(value, acntType, transaction, diff, fromAcnt, toAcnt) {
 	// Set the balance of the account and update localStorage.
 
