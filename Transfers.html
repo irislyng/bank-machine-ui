@@ -25,6 +25,9 @@
 
     <!-- Javascript Files -->
     <script type="text/javascript" src="javascript/authentication.js"></script>
+    <script type="text/javascript" src="javascript/receipt.js"></script>
+
+
   </head>
   <body onload="checkUser()">
   	<div class="container">
@@ -155,8 +158,7 @@
         var transfer_successful = transferFunds(from_acnt, to_acnt, transfer_amount, "transfer-funds-error-message");
 
         if(transfer_successful) {
-          // Add code to go to transfer receipt.
-          location.href="main-menu.html";
+          transferReceipt(from_acnt, to_acnt, transfer_amount);
         }
 
       }
