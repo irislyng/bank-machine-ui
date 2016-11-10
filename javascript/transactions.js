@@ -36,7 +36,7 @@ function withdraw(fromAcnt, toAcnt = null, amount, error_id, isTransfer=false) {
 	// Simulate a withdrawl from a certain account (chequing or savings).
 	if(!isTransfer && amount%20 != 0) {
 		console.log("Error: Unable to withdraw $" + amount + " must be multiples of $20");
-		document.getElementById(error_id).innerHTML = "Error: Unable to withdraw $" + amount + " must be multiples of $20";
+		document.getElementById(error_id).innerHTML = "Error: Unable to withdraw $" + amount + ". The amount must be a multiple of $20. ";
 		document.getElementById(error_id).removeAttribute("hidden");
 		return false;
 	}
