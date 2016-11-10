@@ -68,14 +68,16 @@
           <button type="button" class="btn btn-danger btn-block" onclick="logout()">Logout</button>
         </div>
         <div class="col-lg-offset-4 col-lg-4">
-          <button type="button" class="btn btn-default btn-block">Accounts</button>
+          <a href="Accounts.html" onclick="setTransType('checkBalance')">
+            <button type="button" class="btn btn-default btn-block">Accounts</button>
+          </a>
         </div>
   		</div>
   	</div>
     
     <script>
         var transType = localStorage.getItem("transaction_type");
-
+        
         function setTransType(transaction_type) {
           localStorage.setItem("transaction_type", transaction_type);
         }
