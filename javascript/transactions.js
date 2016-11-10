@@ -104,7 +104,8 @@ function transferFunds(fromAcnt, toAcnt, amount, error_id) {
 	}
 
 	var withdraw_successful = withdraw(fromAcnt, toAcnt, amount, error_id, true);
-	var deposit_successful = deposit(fromAcnt, toAcnt, amount);
+	
+	var deposit_successful = withdraw_successful ? deposit(fromAcnt, toAcnt, amount) : return false;
 
 	return val = withdraw_successful && deposit_successful ? true : false;
 }
