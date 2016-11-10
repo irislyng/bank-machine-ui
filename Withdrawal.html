@@ -159,13 +159,18 @@
 
     function fastWithdraw(amount) {
       var success = withdraw(acnt, null, amount);
-      withdrawMessage(success, amount);
+      if (success) {
+        console.log("Successful withdraw");
+        withdrawalReceipt(acnt, amount);
+      }
     }
     
     function customWithdraw() {
       amount = document.getElementById("withdrawal-amount").value;
       var success = withdraw(acnt, null, amount);
-      withdrawMessage(success, amount);
+      if (success) {
+        withdrawalReceipt(acnt, amount);
+      }
       
     }
 
@@ -189,6 +194,7 @@
 
     <!-- Load necessary javascript files for logic -->
     <script src="javascript/transactions.js"></script>
+    <script src="javascript/receipt.js"></script>
 
   </body>
 </html>
