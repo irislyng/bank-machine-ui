@@ -1,5 +1,21 @@
-function transferReceipt (params) {
-	// TODO: Implement function
+function transferReceipt (fromAccount, toAccount, amount) {
+	var user = getLocalUser();
+
+	var receipt = {
+		type: "transfer",
+		fromAccount: {
+			account: fromAccount,
+			balance: user["accounts"][fromAccount]["balance"]
+		},
+		toAccount: {
+			account: toAccount,
+			balance: user["accounts"][toAccount]["balance"]
+		},
+		amount: amount
+	}
+
+	localStorage.setItem("receipt", JSON.stringify(receipt));
+	location.href="receipt.html"
 }
 
 function withdrawalReceipt(account, amount) {
