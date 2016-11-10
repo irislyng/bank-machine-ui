@@ -32,12 +32,12 @@ function setAccountBalance(value, acntType, transaction, diff, fromAcnt, toAcnt)
 	updateBalances();
 };
 
-function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
+function withdraw(fromAcnt, toAcnt = null, amount, error_id, isTransfer=false) {
 	// Simulate a withdrawl from a certain account (chequing or savings).
-	if(amount%20 != 0) {
+	if(!isTransfer && amount%20 != 0) {
 		console.log("Error: Unable to withdraw $" + amount + " must be multiples of $20");
-		document.getElementById("withdrawal-amount-error-message").innerHTML = "Error: Unable to withdraw $" + amount + " must be multiples of $20";
-		document.getElementById("withdrawal-amount-error-message").removeAttribute("hidden");
+		document.getElementById(error_id).innerHTML = "Error: Unable to withdraw $" + amount + " must be multiples of $20";
+		document.getElementById(error_id).removeAttribute("hidden");
 		return false;
 	}
 
@@ -46,8 +46,8 @@ function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 		if(chequingBalance < amount) {
 			// TODO: Set up error message.
 			console.log("Error: Insufficient funds to withdraw $" + amount);
-			document.getElementById("withdrawal-amount-error-message").innerHTML = "Insufficient funds to withdraw $" + amount;
-			document.getElementById("withdrawal-amount-error-message").removeAttribute("hidden");
+			document.getElementById(error_id).innerHTML = "Insufficient funds to withdraw $" + amount;
+			document.getElementById(error_id).removeAttribute("hidden");
 			return false;
 		}
 		var newChequingBalance = chequingBalance - amount;
@@ -56,8 +56,8 @@ function withdraw(fromAcnt, toAcnt = null, amount, error_id) {
 		if(savingsBalance < amount) {
 			// TODO: Set up error message.
 			console.log("Error: Insufficient funds to withdraw $" + amount);
-			document.getElementById("withdrawal-amount-error-message").innerHTML = "Insufficient funds to withdraw $" + amount;
-			document.getElementById("withdrawal-amount-error-message").removeAttribute("hidden");
+			document.getElementById(error_id).innerHTML = "Insufficient funds to withdraw $" + amount;
+			document.getElementById(error_id).removeAttribute("hidden");
 			return false;
 		}
 		var newSavingsBalance = savingsBalance - amount;
@@ -93,16 +93,21 @@ function deposit(fromAcnt = null, toAcnt, amount) {
 	return true;
 }
 
-function transferFunds(fromAcnt, toAcnt, amount) {
+function transferFunds(fromAcnt, toAcnt, amount, error_id) {
 	// Simulate a transfer between accounts.
 	
 	if(fromAcnt == toAcnt) {
 		console.log("Error: cannot transfer money between the same account.");
-		return;
+		document.getElementById(error_id).innerHTML = "Error: cannot transfer money between the same account.";
+		document.getElementById(error_id).removeAttribute("hidden");
+		return false;
 	}
 
-	withdraw(fromAcnt, toAcnt, amount);
-	deposit(fromAct, toAcnt, amount);
+	var withdraw_successful = withdraw(fromAcnt, toAcnt, amount, error_id, true);
+	
+	var deposit_successful = withdraw_successful ? deposit(fromAcnt, toAcnt, amount) : false;
+
+	return val = withdraw_successful && deposit_successful ? true : false;
 }
 
 

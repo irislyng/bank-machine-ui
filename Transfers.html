@@ -43,29 +43,25 @@
       </div>
   		<div class="row">
         <div class="col-lg-6 col-lg-offset-3">
-			<div class="form-group">
-			<label for="sel1">From:</label>
-			<select class="form-control" id="sel1">
-			<option>Chequing</option>
-			<option>Savings</option>
-			<option>USD</option>
-			<option>Mastercard</option>
-		  </select>
-			</div>
+    			<div class="form-group">
+    			 <label for="from-selecter">From:</label>
+      			<select class="form-control" id="from-selecter">
+        			<option value="chequing">Chequing</option>
+        			<option value="savings">Savings</option>
+      		  </select>
+    			</div>
         </div>
 		</div>
 		
 		<div class="row">
         <div class="col-lg-6 col-lg-offset-3">
-			<div class="form-group">
-			<label for="sel1">To:</label>
-			<select class="form-control" id="sel1">
-			<option>Chequing</option>
-			<option>Savings</option>
-			<option>USD</option>
-			<option>Mastercard</option>
-		  </select>
-			</div>
+    			<div class="form-group">
+      			<label for="to-selecter">To:</label>
+      			<select class="form-control" id="to-selecter">
+        			<option value="chequing">Chequing</option>
+        			<option value="savings">Savings</option>
+      		  </select>
+    			</div>
         </div>
 		</div>
 	</div>
@@ -75,11 +71,12 @@
         <div class="col-lg-offset-3 col-lg-6">
     			<div class="form-group">
             <label for="account-number">Amount to Transfer:</label>
-			<div class="input-group">
-			<div class="input-group-addon">$</div>
+      			<div class="input-group">
+      			<div class="input-group-addon">$</div>
             <input id="transfer-amount" type="text" onkeypress="return false" class="form-control">
-			<div class="input-group-addon">.00</div>
+            <div class="input-group-addon">.00</div>
           </div>
+          <div id="transfer-funds-error-message" class="alert alert-danger" hidden=""></div>
         </div>
   		</div>
 		</div>
@@ -115,14 +112,14 @@
           <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-warning btn-keypad" onclick="removeInput()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
             <button type="button" class="btn btn-default btn-keypad" onclick="addInput(0)">0</button>
-            <button id="button-enter-transfer" type="button" class="btn btn-success btn-keypad" disabled"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
+            <button id="button-enter-transfer" type="button" class="btn btn-success btn-keypad" disabled="true" onclick="runTransfer()"><i class="fa fa-white fa-check" aria-hidden="true"></i></button>
           </div>
         </center>
       </div>
   	</div>	
 
     <script>
-    function addInput(value) {
+      function addInput(value) {
         var input = document.getElementById("transfer-amount").value;
         var length = input.length;
 
@@ -149,11 +146,26 @@
           document.getElementById("button-enter-transfer").disabled = false;
         }
       }
+
+      function runTransfer() {
+        var from_acnt = document.getElementById("from-selecter").value;
+        var to_acnt = document.getElementById("to-selecter").value;
+        var transfer_amount = parseInt(document.getElementById("transfer-amount").value);
+
+        var transfer_successful = transferFunds(from_acnt, to_acnt, transfer_amount, "transfer-funds-error-message");
+
+        if(transfer_successful) {
+          // Add code to go to transfer receipt.
+          location.href="main-menu.html";
+        }
+
+      }
     </script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="javascript/transactions.js"></script>
   </body>
 </html>
